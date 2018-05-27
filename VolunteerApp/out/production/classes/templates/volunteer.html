@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <style>
+
+.success {
+    background-color: #ddffdd;
+    border-left: 6px solid #4CAF50;
+}
+
+.info {
+    background-color: #e7f3fe;
+    border-left: 6px solid #2196F3;
+}
+</style>
+
+
+
+</head>
+<body>
+
+<h1>Edit info</h1>
+
+<div class="info">
+    <p th:text="${welcomeMessage}" ></p>
+</div>
+
+<div class="success">
+    <p th:text="${message}" > </p>
+</div>
+
+<form action="#" th:action="@{/volunteer}" th:object="${volunteerDto}" method="post">
+
+    <p>Name: <input type="text" th:field="*{name}" /></p>
+
+    <p>Phone Number: <input type="text" th:field="*{phoneNumber}" /></p>
+
+    <p>Current field of interest: <input type="text" th:field="*{category}" /></p>
+
+    <p>Username: <input type="text" th:field="*{username}" /></p>
+
+    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>
+
+    <p>Password: <input type="password" th:field="*{password}" /></p>
+
+    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
+
+    <p>Unique key: <input type="text" th:field="*{id}" readonly /></p>
+
+    <!--<p> <button name = "update" onclick="alert('Are you sure you want to submit changes?')">Update info</button> </p>-->
+
+    <!--<p><input type="submit" name = "update" onclick="alert('Are you sure you want to submit changes?')" value="Update info"  /></p>-->
+
+    <!--<div class="alert alert-success">-->
+        <!--<strong>Success!</strong> You should <a href="#" class="alert-link">read this message</a>.-->
+    <!--</div>-->
+
+    <p><input type="submit" name = "update" value="Update info"  /></p>
+
+    <p><input type="submit" name = "show" value="Show existing events" /></p>
+
+</form>
+
+<form action="#" th:action="@{/volunteer}" th:object="${eventDto}" method="post">
+
+    <table style="width:100%">
+        <thead>
+        <tr>
+            <th>UNIQUE IDENTIFIER</th>
+            <th>NAME</th>
+            <th>STARTING DATE</th>
+            <th>LOCATION</th>
+            <th>ORGANIZER</th>
+            <th>NUMBER OF VOLUNTEERS</th>
+            <th>CATEGORY</th>
+
+        </tr>
+        </thead>
+
+        <body>
+        <tr th:each = "eventHtml : ${events}">
+            <td align="center" th:text = "${eventHtml.id}" ></td>
+            <td align="center" th:text = "${eventHtml.name}" ></td>
+            <td align="center" th:text = "${eventHtml.date}" ></td>
+            <td align="center" th:text = "${eventHtml.location}" ></td>
+            <td align="center" th:text = "${eventHtml.organizer}" ></td>
+            <td align="center" th:text = "${eventHtml.noOfVolunteers}" ></td>
+            <td align="center" th:text = "${eventHtml.category}" ></td>
+
+        </tr>
+        </body>
+    </table>
+
+
+</form>
+
+<h3> Apply for one of the events above </h3>
+
+<form action="#" th:action="@{/volunteer}" th:object="${eventDto}" method="post">
+
+    <p>Event's unique identifier: <input type="number"  th:field="*{id}" /></p>
+
+    <p><input type="submit" name = "apply" value="Apply" /></p>
+
+</form>
+
+
+
+</body>
+</html>
