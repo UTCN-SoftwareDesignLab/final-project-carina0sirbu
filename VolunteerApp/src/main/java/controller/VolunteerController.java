@@ -53,7 +53,8 @@ public class VolunteerController {
     }
 
     @PostMapping(params = "update")
-    public String updateVolunteer(@ModelAttribute @Valid VolunteerDto volunteerDto, BindingResult bindingResult, Model model, Principal principal) {
+    public String updateVolunteer(@ModelAttribute @Valid VolunteerDto volunteerDto, BindingResult bindingResult,
+                                  @ModelAttribute EventDto eventDto, Model model, Principal principal) {
 
         model.addAttribute("welcomeMessage", "Welcome, " + volunteerService.findByUsername(principal.getName()).getName() + "!");
 
@@ -92,14 +93,13 @@ public class VolunteerController {
         model.addAttribute("welcomeMessage", "Welcome, " + volunteerService.findByUsername(principal.getName()).getName() + "!");
 
         if (eventService.updateEvent(id)) {
-            model.addAttribute("message", "BRAVO TU");
+            model.addAttribute("messageEvent", "You have successfully applied to this event!");
         } else {
-            model.addAttribute("message", "YOU SUCK");
+            model.addAttribute("messageFail", "There are no more positions available for this event!");
         }
 
         return "volunteer";
     }
-
 
 
     private String getErrors(BindingResult bindingResult) {

@@ -19,6 +19,7 @@ public class Volunteer {
 
     @Enumerated(EnumType.STRING)
     private Category category;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 

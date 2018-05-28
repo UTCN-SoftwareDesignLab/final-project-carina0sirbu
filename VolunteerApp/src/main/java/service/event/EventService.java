@@ -12,4 +12,6 @@ public interface EventService {
     List<Event> findAll();
 
     boolean updateEvent(Long id);
+
+    Event findById(Long id);
 }

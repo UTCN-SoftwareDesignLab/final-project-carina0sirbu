@@ -1,10 +1,15 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:style="http://www.w3.org/1999/xhtml">
 <head>
     <title>User</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <style>
+
+.danger {
+    background-color: #ffdddd;
+    border-left: 6px solid #f44336;
+}
 
 .success {
     background-color: #ddffdd;
@@ -29,7 +34,7 @@
 </div>
 
 <div class="success">
-    <p th:text="${message}" > </p>
+    <p th:text="${message}" width="400" > </p>
 </div>
 
 <form action="#" th:action="@{/volunteer}" th:object="${volunteerDto}" method="post">
@@ -55,7 +60,7 @@
     <!--<p><input type="submit" name = "update" onclick="alert('Are you sure you want to submit changes?')" value="Update info"  /></p>-->
 
     <!--<div class="alert alert-success">-->
-        <!--<strong>Success!</strong> You should <a href="#" class="alert-link">read this message</a>.-->
+    <!--<strong>Success!</strong> You should <a href="#" class="alert-link">read this message</a>.-->
     <!--</div>-->
 
     <p><input type="submit" name = "update" value="Update info"  /></p>
@@ -107,6 +112,13 @@
 
 </form>
 
+<div class="success">
+    <p th:text="${messageEvent}" > </p>
+</div>
+
+<div class="danger">
+    <p th:text="${messageFail}" > </p>
+</div>
 
 
 </body>

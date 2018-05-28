@@ -62,6 +62,13 @@ public class EventServiceImpl implements EventService {
 
         event.setNoOfVolunteers(availableSeats - 1);
 
-        return true;
+        eventRepository.save(event);
+
+        return eventRepository.findById(event.getId()).isPresent();
+    }
+
+    @Override
+    public Event findById(Long id) {
+        return eventRepository.findById(id).get();
     }
 }

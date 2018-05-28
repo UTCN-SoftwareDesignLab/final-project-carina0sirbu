@@ -60,7 +60,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
         if (isVolunteer) {
             return "/volunteer";
         } else if (isAdmin) {
-            return "/manageUsers";
+            return "/event";
         } else {
             throw new IllegalStateException();
         }

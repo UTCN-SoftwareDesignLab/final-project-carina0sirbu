@@ -5,12 +5,15 @@ import model.Category;
 import model.Role;
 import model.Volunteer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Persistable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import repository.VolunteerRepository;
 
+import java.util.List;
+
 @Service
-public class VolunteerServiceImpl implements VolunteerService {
+public class VolunteerServiceImpl implements VolunteerService, Persistable<Volunteer> {
 
     private VolunteerRepository volunteerRepository;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -25,8 +28,10 @@ public class VolunteerServiceImpl implements VolunteerService {
 
         Category category = null;
         String requestedCategory = volunteerDto.getCategory().toString();
+        String administrative = Category.ADMINISTRATIVE.toString();
 
         switch (requestedCategory) {
+//            case String.valueOf(Category.ADMINISTRATIVE.toString()):
             case "ADMINISTRATIVE":
                 category = Category.ADMINISTRATIVE;
                 break;
@@ -51,6 +56,8 @@ public class VolunteerServiceImpl implements VolunteerService {
     public boolean create(Volunteer volunteer) {
 
         volunteerRepository.save(volunteer);
+
+
 
         return volunteerRepository.findById(volunteer.getId()).isPresent();
     }
@@ -77,4 +84,18 @@ public class VolunteerServiceImpl implements VolunteerService {
         return volunteerRepository.findById(volunteer.getId()).isPresent();
     }
 
+    @Override
+    public List<Volunteer> findAllByCategory(Category category) {
+        return volunteerRepository.findAllByCategory(category);
+    }
+
+    @Override
+    public Volunteer getId() {
+        return null;
+    }
+
+    @Override
+    public boolean isNew() {
+        return false;
+    }
 }
